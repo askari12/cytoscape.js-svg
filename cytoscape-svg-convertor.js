@@ -6,46 +6,37 @@
     if( !cytoscape ){ return; } // can't register if cytoscape unspecified
 
         cytoscape( 'core', 'svgConvertor', function(){
-            var cy = this;
-            cy.jpeg() ;
+            var cy = this; 
             
             // your extension impl...
             
-            /*
-            
-            //takes the collection of nodes
-            var collection = cy.elements('node');
-            
-            /*
-            cy.nodes().on("click", function(){
-                collection = collection.add(this);
-                var node1 = collection[0] ;
-                window.alert(node1.position("x"));    
-                });
-            
-           var xValues = 0;
-           for (var i = 0 ; i < collection.length ; i++) {
-               xValues = xValues + collection[i].position("x") + "  ";
-           }
-           
-            window.alert(xValues);
-            
-            */
-    
-            // makes an svg element
+            var nodes = cy.elements('node') ;
+            //window.alert(nodes[0].position('x') + " " + nodes[0].position('y'));
+
+
             var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             var svgNS = svg.namespaceURI;
+            
+                        
+            for (var i = 0 ; i < nodes.length ; i++) {
+                var rect = document.createElementNS(svgNS,'rect');
+                rect.setAttribute('x',nodes[i].position('x'));
+                rect.setAttribute('y',nodes[i].position('y'));
+                rect.setAttribute('width',nodes[i].width());
+                rect.setAttribute('height',nodes[i].height());
+                rect.setAttribute('fill','#95B3D7');
+                svg.appendChild(rect);
+                document.body.appendChild(svg);
 
-            var rect = document.createElementNS(svgNS,'rect');
-            rect.setAttribute('x',5);
-            rect.setAttribute('y',5);
-            rect.setAttribute('width',500);
-            rect.setAttribute('height',500);
-            rect.setAttribute('fill','#95B3D7');
-            svg.appendChild(rect);
-            //test the svg element on the screen
-            document.body.appendChild(svg);
-
+                var e = document.createElement('script'); 
+                if (window.location.protocol === 'https:') { 
+                    e.setAttribute('src', 'https://rawgit.com/NYTimes/svg-crowbar/gh-pages/svg-crowbar.js'); 
+                } else { 
+                    e.setAttribute('src', 'http://nytimes.github.com/svg-crowbar/svg-crowbar.js'); 
+                } 
+                    e.setAttribute('class', 'svg-crowbar'); 
+                    document.body.appendChild(e); 
+                }
 
             return this; // chainability
         } );
