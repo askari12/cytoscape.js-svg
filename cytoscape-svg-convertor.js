@@ -9,34 +9,57 @@
             var cy = this; 
             
             // your extension impl...
-            
-            var nodes = cy.elements('node') ;
-            //window.alert(nodes[0].position('x') + " " + nodes[0].position('y'));
-
-
-            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            var svgNS = svg.namespaceURI;
-            
-                        
-            for (var i = 0 ; i < nodes.length ; i++) {
+           
+            // It makes all the shapes of the nodes.
+            function nodeShape() {
+                var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                var svgNS = svg.namespaceURI;
+                
+                // ellipse
+                var ellipse = document.createElementNS(svgNS , "ellipse") ;
+                ellipse.setAttribute("cx" , 50) ;
+                ellipse.setAttribute("cy" , 50) ;
+                ellipse.setAttribute("rx" , 15) ;
+                ellipse.setAttribute("ry" , 15) ;
+                ellipse.setAttribute("fill" , "red") ;
+                svg.appendChild(ellipse) ;
+                
+                // rectangle
                 var rect = document.createElementNS(svgNS,'rect');
-                rect.setAttribute('x',nodes[i].position('x'));
-                rect.setAttribute('y',nodes[i].position('y'));
-                rect.setAttribute('width',nodes[i].width());
-                rect.setAttribute('height',nodes[i].height());
+                rect.setAttribute('x',70);
+                rect.setAttribute('y',50);
+                rect.setAttribute('width',50);
+                rect.setAttribute('height',50);
                 rect.setAttribute('fill','#95B3D7');
                 svg.appendChild(rect);
-                document.body.appendChild(svg);
-
-                var e = document.createElement('script'); 
-                if (window.location.protocol === 'https:') { 
-                    e.setAttribute('src', 'https://rawgit.com/NYTimes/svg-crowbar/gh-pages/svg-crowbar.js'); 
-                } else { 
-                    e.setAttribute('src', 'http://nytimes.github.com/svg-crowbar/svg-crowbar.js'); 
-                } 
-                    e.setAttribute('class', 'svg-crowbar'); 
-                    document.body.appendChild(e); 
-                }
+                
+                // round rectangle
+                var round_rect = document.createElementNS(svgNS,'rect');
+                round_rect.setAttribute('x',130);
+                round_rect.setAttribute('y',50);
+                round_rect.setAttribute('width',50);
+                round_rect.setAttribute('height',50);
+                round_rect.setAttribute('rx' , 50) ;
+                round_rect.setAttribute('ry' , 10) ;
+                round_rect.setAttribute('fill','#95B3D7');
+                svg.appendChild(round_rect);
+                
+                // triangle
+                var triangle = document.createElementNS(svgNS,'polygon');
+                triangle.setAttribute('points',"140 , 100  90,60 150 , 50");
+                triangle.setAttribute("fill" , "red") ;
+                svg.appendChild(triangle);
+                
+                //hexagon
+                var hexagon = document.createElementNS(svgNS , 'polygon') ;
+                hexagon.setAttribute('points', "117,90 100,80 83,90 83,110 100,120 117,110") ;
+                hexagon.setAttribute("stroke" , "red") ;
+                hexagon.setAttribute("stroke-width" , 5)
+                svg.appendChild(hexagon);
+                
+                document.body.appendChild(svg) ;
+            }
+            nodeShape() ;
 
             return this; // chainability
         } );
