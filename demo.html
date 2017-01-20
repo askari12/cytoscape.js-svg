@@ -8,18 +8,18 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 
 		<script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
+                
 
 		<!-- for testing with local version of cytoscape.js -->
 		<!--<script src="../cytoscape.js/build/cytoscape.js"></script>-->
-
-		<script src="cytoscape-svg-convertor.js"></script>
+                <script src="cytoscape-svg-convertor.js" type="text/javascript"></script>
+                
 
 		<style>
 			body {
 				font-family: helvetica neue, helvetica, liberation sans, arial, sans-serif;
 				font-size: 14px;
 			}
-
 			#cy {
 				position: absolute;
 				left: 0;
@@ -28,7 +28,6 @@
 				right: 0;
 				z-index: 999;
 			}
-
 			h1 {
 				opacity: 0.5;
 				font-size: 1em;
@@ -38,33 +37,34 @@
 
 		<script>
 			document.addEventListener('DOMContentLoaded', function(){
-
 				var cy = window.cy = cytoscape({
 					container: document.getElementById('cy'),
-
 					style: [
 						{
 							selector: 'node',
 							style: {
-								'content': 'data(name)'
+								'content': 'data(name)',
+                                                                'shape' : 'polygon',
+                                                                'background-color': 'red' ,
+                                                                'background-opacity' : '0.5' ,
+                                                                'border-width' : 4 ,
+                                                                'border-color' : 'blue' ,
+                                                                'border-style' : 'dotted' ,
+                                                                'text-outline-color' : 'blue'
 							}
 						},
-
 						{
 							selector: 'edge',
 							style: {
 								'target-arrow-shape': 'triangle'
 							}
 						},
-
 						{
 							selector: ':selected',
 							style: {
-
 							}
 						}
 					],
-
 					elements: {
 						nodes: [
 							{ data: { id: 'j', name: 'Jerry' } },
@@ -83,21 +83,19 @@
 							{ data: { source: 'k', target: 'g' } },
 							{ data: { source: 'g', target: 'j' } }
 						]
-					},
+					}
 				});
-
 				// demo your core ext
-				cy.svg-convertor( /* args... */ );
-
+				cy.svgConvertor( /* args... */ );
 			});
 		</script>
-	</head>
+        </head>
 
 	<body>
-		<h1>cytoscape-svg-convertor demo</h1>
-
-		<div id="cy"></div>
-
-	</body>
-
+            <script src="//cdnjs.cloudflare.com/ajax/libs/svg.js/2.4.0/svg.min.js"></script>
+            <div id="create"></div>
+            <div id="cy"></div>
+            
+        </body>
+       
 </html>
