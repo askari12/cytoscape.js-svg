@@ -7,84 +7,190 @@
 
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 
+
+
+		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 		<script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
-                
 
 		<!-- for testing with local version of cytoscape.js -->
 		<!--<script src="../cytoscape.js/build/cytoscape.js"></script>-->
-                <script src="cytoscape-svg-convertor.js" type="text/javascript"></script>
-                
 
+		<script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
+		<script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>                
+                <script src="cytoscape-svg-convertor.js" type="text/javascript"></script>
+
+  
 		<style>
 			body {
-				font-family: helvetica neue, helvetica, liberation sans, arial, sans-serif;
+				font-family: helvetica;
 				font-size: 14px;
 			}
 			#cy {
+				width: 100%;
+				height: 100%;
 				position: absolute;
 				left: 0;
 				top: 0;
-				bottom: 0;
-				right: 0;
 				z-index: 999;
 			}
 			h1 {
 				opacity: 0.5;
 				font-size: 1em;
-				font-weight: bold;
 			}
 		</style>
 
 		<script>
-			document.addEventListener('DOMContentLoaded', function(){
+			$(function(){
 				var cy = window.cy = cytoscape({
 					container: document.getElementById('cy'),
+          boxSelectionEnabled: false,
+          autounselectify: true,
+					layout: {
+						name: 'dagre'
+					},
 					style: [
 						{
 							selector: 'node',
 							style: {
-								'content': 'data(name)',
-                                                                'shape' : 'polygon',
-                                                                'background-color': 'red' ,
-                                                                'background-opacity' : '0.5' ,
-                                                                'border-width' : 4 ,
-                                                                'border-color' : 'blue' ,
-                                                                'border-style' : 'dotted' ,
-                                                                'text-outline-color' : 'blue'
-							}
+								'content': 'data(id)',
+								'text-opacity': 0.5,
+								'text-valign': 'center',
+								'text-halign': 'right',
+								'background-color': '#11479e',
+                                                                'background-opacity' : 0.5
+                                                        }
 						},
 						{
 							selector: 'edge',
 							style: {
-								'target-arrow-shape': 'triangle'
-							}
-						},
-						{
-							selector: ':selected',
-							style: {
+								'width': 4,
+								'mid-target-arrow-shape': 'triangle',
+								'line-color': '#9dbaea',
+								'mid-target-arrow-color': '#9dbaea',
+								'curve-style': 'bezier'
 							}
 						}
 					],
 					elements: {
 						nodes: [
-							{ data: { id: 'j', name: 'Jerry' } },
-							{ data: { id: 'e', name: 'Elaine' } },
-							{ data: { id: 'k', name: 'Kramer' } },
-							{ data: { id: 'g', name: 'George' } }
+							{ data: { id: 'n0' } 
+                                                            , style : {
+                                                                'shape' : 'ellipse'
+                                                            ,   'background-color' : 'red'
+                                                            , 'background-opacity' : 1
+                                                            , 'border-style' :'dotted'
+                                                            , 'border-color' : 'gold'
+                                                            , 'border-width' : 2
+                                                            } },
+							{ data: { id: 'n1' } 
+                                                            , style : {
+                                                                'shape' : 'rectangle'
+                                                            ,   'background-color' : 'indigo'
+                                                            , 'border-width' : 8
+                                                            , 'border-style' :'dashed'
+                                                            }},
+							{ data: { id: 'n2' } 
+                                                            , style : {
+                                                                'shape' : 'roundrectangle'
+                                                            ,   'background-color' : 'lime'    
+                                                            , 'border-color' : 'red'
+                                                            , 'border-width' : 2
+                                                            }},
+							{ data: { id: 'n3' } 
+                                                            , style : {
+                                                                'shape' : 'triangle'
+                                                            ,   'background-color' : 'violet'    
+                                                            , 'border-color' : 'silver'
+                                                            , 'border-width' : 2
+                                                            }},
+							{ data: { id: 'n4' } 
+                                                            , style : {
+                                                                'shape' : 'pentagon'
+                                                            ,   'background-opacity' : 0    
+                                                            }},
+							{ data: { id: 'n5' } 
+                                                            , style : {
+                                                                'shape' : 'hexagon'
+                                                            ,   'background-color' : 'purple'
+                                                            ,   'background-opacity' : 0.5
+                                                            }},
+							{ data: { id: 'n6' } 
+                                                            , style : {
+                                                                'shape' : 'heptagon'
+                                                            ,   'background-color' : 'pink'    
+                                                            }},
+							{ data: { id: 'n7' } 
+                                                            , style : {
+                                                                'shape' : 'octagon'
+                                                            ,   'background-color' : 'orange'    
+                                                            }},
+							{ data: { id: 'n8' } 
+                                                            , style : {
+                                                                'shape' : 'star'
+                                                            ,   'background-color' : 'brown'    
+                                                            }},
+							{ data: { id: 'n9' } 
+                                                            , style : {
+                                                                'shape' : 'diamond'
+                                                            ,   'background-color' : 'black'    
+                                                            }},
+							{ data: { id: 'n10' } 
+                                                            , style : {
+                                                                'shape' : 'vee'
+                                                            ,   'background-color' : 'grey'    
+                                                            }},
+							{ data: { id: 'n11' } 
+                                                            , style : {
+                                                                'shape' : 'rhomboid'
+                                                            ,   'background-color' : 'green'
+                                                            ,   'background-image' : 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS0FTmJ1c9g59MkWLBBpwBtnQU5jc_9XruYaPc3J1T8l66N8T4nA7V1fTI'
+                                                            ,   'background-fit' : 'none'
+                                                            }}
 						],
 						edges: [
-							{ data: { source: 'j', target: 'e' } },
-							{ data: { source: 'j', target: 'k' } },
-							{ data: { source: 'j', target: 'g' } },
-							{ data: { source: 'e', target: 'j' } },
-							{ data: { source: 'e', target: 'k' } },
-							{ data: { source: 'k', target: 'j' } },
-							{ data: { source: 'k', target: 'e' } },
-							{ data: { source: 'k', target: 'g' } },
-							{ data: { source: 'g', target: 'j' } }
+							{ data: { source: 'n0', target: 'n1' } 
+                                                        , style : {
+                                                            'curve-style' : 'segments'
+                                                        , 'mid-target-arrow-shape' : 'tee'
+                                                        , 'target-arrow-shape' : 'tee'
+                                                        }},
+							{ data: { source: 'n1', target: 'n2' } 
+                                                        , style : {
+                                                            'curve-style' : 'segments'
+                                                        , 'mid-target-arrow-shape' : 'triangle-tee'    
+                                                        , 'target-arrow-shape' : 'triangle-tee'
+                                                        }},
+							{ data: { source: 'n1', target: 'n3' } 
+                                                        , style : {
+                                                            'curve-style' : 'segments'
+                                                        , 'mid-target-arrow-shape' : 'triangle-backcurve'    
+                                                        , 'target-arrow-shape' : 'triangle-backcurve'
+                                                        }},
+							{ data: { source: 'n4', target: 'n5' } 
+                                                        , style : {
+                                                            'curve-style' : 'unbundled-bezier'
+                                                        , 'mid-target-arrow-shape' : 'square'    
+                                                        , 'target-arrow-shape' : 'square'
+                                                        }},
+							{ data: { source: 'n4', target: 'n6' } 
+                                                        , style : {
+                                                            'curve-style' : 'bezier'
+                                                        , 'mid-target-arrow-shape' : 'circle'    
+                                                        , 'target-arrow-shape' : 'circle'
+                                                        }},
+							{ data: { source: 'n6', target: 'n7' } 
+                                                        , style : {
+                                                            'curve-style' : 'bezier'
+                                                        , 'mid-target-arrow-shape' : 'diamond'    
+                                                        , 'target-arrow-shape' : 'diamond'
+                                                        }},
+							{ data: { source: 'n6', target: 'n8' } },
+							{ data: { source: 'n8', target: 'n9' } },
+							{ data: { source: 'n8', target: 'n10' } },
 						]
-					}
+					},
 				});
+
 				// demo your core ext
 				cy.svgConvertor( /* args... */ );
 			});
@@ -93,6 +199,7 @@
 
 	<body>
             <script src="//cdnjs.cloudflare.com/ajax/libs/svg.js/2.4.0/svg.min.js"></script>
+            <script src="http://cdn.rawgit.com/rdfriedl/svg.filter.js/fc69bb6e2dd0b815497bd048ec47aebc0ec592dd/svg.filter.js"></script>
             <div id="create"></div>
             <div id="cy"></div>
             
